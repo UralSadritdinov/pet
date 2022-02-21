@@ -12,17 +12,13 @@
 /log/*
 /tmp/*
 
-# Ignore pidfiles, but keep the directory.
+# Ignore pidfiles.
 /tmp/pids/*
-!/tmp/pids/
-!/tmp/pids/.keep
 
 # Ignore uploaded files in development.
 /storage/*
 !/storage/.keep
 /tmp/storage/*
-!/tmp/storage/
-!/tmp/storage/.keep
 
 /public/assets
 
