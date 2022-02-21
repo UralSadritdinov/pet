@@ -28,6 +28,9 @@ group :development, :test do
   gem "rspec-rails"
   gem "factory_bot_rails"
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem "rubocop"
+  gem "rubocop-rails"
+  gem "rubocop-rspec"
 end
 
 group :development do
