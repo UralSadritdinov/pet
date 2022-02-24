@@ -10,7 +10,7 @@ Things you may want to cover:
 
 * Rails version: 7.0.2
 
-* PostgresQL: 12.9
+* PostgreSQL: 12.9
 
 Link: https://github.com/42praktika/DevOps-Course
 
