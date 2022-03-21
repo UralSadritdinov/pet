@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(params).save
+    @post = Post.new(post_params).save
   end
 
   def index
@@ -19,6 +19,11 @@ class PostsController < ApplicationController
   end
 
   def update
+    if @post.update(post_params)
+      redirect_to(@post)
+    else
+      render "edit"
+    end
   end
 
   def delete
@@ -27,9 +32,9 @@ class PostsController < ApplicationController
 
   private
 
-  # def params
-  # 	params.require(:post).permit(:title, :content)
-  # end
+  def post_params
+    params.require(:post).permit(:title, :content)
+  end
 
   def find_post
     @post = Post.kept.find(params[:id])
