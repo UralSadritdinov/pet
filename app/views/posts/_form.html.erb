@@ -1,0 +1,11 @@
+<%= simple_form_for @post do |f| %>
+  <div class="mt-4">
+    <%= f.input :title %>
+  </div>
+  <div class="mt-4">
+    <%= f.input :content %>
+  </div>
+  <div class="btn btn-primary mt-4">
+    <%= f.button :submit, class: "link-light" %>
+  </div>
+<% end %>
