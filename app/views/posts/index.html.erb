@@ -35,7 +35,7 @@
     <% end %>
   </tbody>
 </table>
-
 <br>
-
-<div class="btn btn-primary mt-4"><%= link_to "New post", new_post_path, class: "link-light"  %></div>
+<% if user_signed_in? %>
+  <div class="btn btn-primary mt-4"><%= link_to "New post", new_post_path, class: "link-light"  %></div>
+<% end %>
