@@ -3,6 +3,8 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+
+    authorize! @post, to: :create?, with: PostPolicy
   end
 
   def create
@@ -17,15 +19,21 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.kept
+
+    authorize! "posts", to: :index?, with: PostPolicy
   end
 
   def show
+    authorize! @post, to: :show?
   end
 
   def edit
+    authorize! @post, to: :update?
   end
 
   def update
+    authorize! @post, to: :update?
+
     if @post.update(post_params)
       redirect_to @post, notice: "Post was successfully updated"
     else
@@ -34,6 +42,8 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    authorize! @post, to: :delete?
+
     redirect_to posts_url, notice: "Post was successfully deleted" if @post.discard
   end
 

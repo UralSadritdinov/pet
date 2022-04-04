@@ -6,6 +6,7 @@ ruby "3.0.3"
 gem "pg"
 gem "rails", "~> 7.0.2"
 
+gem "action_policy"
 gem "bcrypt"
 gem "bootsnap", require: false
 gem "devise"
