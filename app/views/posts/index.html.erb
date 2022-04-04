@@ -12,22 +12,22 @@
   <tbody>
     <% @posts.each do |post| %>
       <tr>
-        <td><%= post.title %></td>
+        <td><b><%= post.title %></b></td>
         <td><%= post.content %></td>
         <td>
-          <div class="btn btn-primary mx-2 mt-4">
-            <%= link_to "Show", post, class: "link-light"  %>
+          <div class="mx-2 mt-4">
+            <%= button_to "Show", post, method: :get, class: "btn btn-primary"  %>
           </div>
         </td>
         <% if user_signed_in? %>
 	        <td>
-            <div class="btn btn-primary mx-2 mt-4">
-              <%= link_to "Edit", edit_post_path(post), class: "link-light"  %>
+            <div class="mx-2 mt-4">
+              <%= button_to "Edit", edit_post_path(post), method: :get, class: "btn btn-primary"  %>
             </div>
           </td>
 	        <td>
-            <div class="btn btn-primary mx-2 mt-4">
-              <%= link_to "Destroy", post, method: :delete, data: { confirm: "Are you sure?" }, class: "link-light" %>
+            <div class="mx-2 mt-4">
+              <%= button_to "Destroy", post, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn btn-primary" %>
             </div>
           </td>
 	      <% end %>
@@ -37,5 +37,7 @@
 </table>
 <br>
 <% if user_signed_in? %>
-  <div class="btn btn-primary mt-4"><%= link_to "New post", new_post_path, class: "link-light"  %></div>
+  <div class="mt-4">
+    <%= button_to "New post", new_post_path, method: :get, class: "btn btn-primary"  %>
+  </div>
 <% end %>

@@ -3,6 +3,6 @@
 <%= render 'shared/errors', model: @post %>
 <%= render partial: "form"%>
 
-<div class="btn btn-primary mt-4">
-	<%= link_to 'Back', posts_path, class: "link-light", class: "link-light" %>	
+<div class="mt-4">
+	<%= button_to 'Back', :back, method: :get, class: "btn btn-primary" %>
 </div>
