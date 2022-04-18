@@ -1,14 +1,11 @@
 # Summary
 
-PT story: https://www.pivotaltracker.com/story/show/[story-id]
-
 A brief description of the pull request.
 
 # Test plan
 
 Describe list of steps to manually test introduced steps.
 
-* Go to http://fs-rewards-pr-#{id}.herokuapp.com
 * Sign in
 * ...
 
