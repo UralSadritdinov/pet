@@ -19,12 +19,9 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.kept
-
-    authorize! "posts", to: :index?, with: PostPolicy
   end
 
   def show
-    authorize! @post, to: :show?
   end
 
   def edit

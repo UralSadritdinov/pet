@@ -19,7 +19,7 @@
             <%= button_to "Show", post, method: :get, class: "btn btn-primary"  %>
           </div>
         </td>
-        <% if user_signed_in? %>
+        <% if user_signed_in? && current_user.id == post.user_id %>
 	        <td>
             <div class="mx-2 mt-4">
               <%= button_to "Edit", edit_post_path(post), method: :get, class: "btn btn-primary"  %>
@@ -30,7 +30,7 @@
               <%= button_to "Destroy", post, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn btn-primary" %>
             </div>
           </td>
-	      <% end %>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
