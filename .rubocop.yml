@@ -126,6 +126,9 @@ Layout/SpaceAroundMethodCallOperator:
 Layout/HashAlignment:
   EnforcedLastArgumentHashStyle: ignore_implicit
 
+Layout/TrailingEmptyLines:
+  Enabled: true
+
 Metrics/BlockLength:
   Enabled: false
 

@@ -1,0 +1,8 @@
+<h1 class="mt-4">New Post</h1>
+
+<%= render 'shared/errors', model: @post %>
+<%= render partial: "form"%>
+
+<div class="mt-4">
+	<%= button_to 'Back', :back, method: :get, class: "btn btn-primary" %>
+</div>
