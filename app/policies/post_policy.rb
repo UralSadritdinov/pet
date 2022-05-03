@@ -10,4 +10,12 @@ class PostPolicy < ApplicationPolicy
   def delete?
     owner?
   end
+
+  def publish?
+    record.draft? && owner?
+  end
+
+  def unpublish?
+    record.published? && owner?
+  end
 end

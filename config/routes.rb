@@ -5,5 +5,7 @@ Rails.application.routes.draw do
 
   root "home#index"
 
-  resources :posts
+  resources :posts do
+    resources :publication, only: %w[create destroy], module: :posts
+  end
 end

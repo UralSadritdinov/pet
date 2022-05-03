@@ -7,5 +7,12 @@
     <div class="mt-4">
       <%= button_to 'Back', :back, method: :get, class: "btn btn-primary" %>
     </div>
+    <div class="mt-4">
+      <% if @post.draft? %>
+        <%= button_to 'Publish', post_publication_index_path(@post), method: :create, class: "btn btn-primary" %>
+      <% else %>
+        <%= button_to 'Unbublish', post_publication_path(@post), method: :delete, class: "btn btn-primary" %>
+      <% end %>
+    </div>
   </div>
 </div>
