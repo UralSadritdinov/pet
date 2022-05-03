@@ -2,7 +2,7 @@ class PublicationController < ApplicationController
   before_action :find_post, only: %i[create destroy]
 
   def create
-    authorize! @post, to: :publish?, with: PostPolicy
+    authorize! @post, to: :publish?
 
     if @post.update(status: "published")
       redirect_to @post, notice: "Post was successfully published"
@@ -12,7 +12,7 @@ class PublicationController < ApplicationController
   end
 
   def destroy
-    authorize! @post, to: :unpublish?, with: PostPolicy
+    authorize! @post, to: :unpublish?
 
     if @post.update(status: "draft")
       redirect_to @post, notice: "Post was successfully back to draft"
