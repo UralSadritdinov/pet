@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root "home#index"
 
   resources :posts do
-    resources :publication, only: %w[create destroy], module: :posts
+    post "publish", to: "publication#create"
+    delete "unpublish", to: "publication#destroy"
   end
 end
