@@ -12,10 +12,10 @@ class PostPolicy < ApplicationPolicy
   end
 
   def publish?
-    record.draft? && owner?
+    owner? && record.draft?
   end
 
   def unpublish?
-    record.published? && owner?
+    owner? && record.published?
   end
 end
