@@ -19,7 +19,7 @@
             <%= button_to "Show", post, method: :get, class: "btn btn-primary"  %>
           </div>
         </td>
-        <% if user_signed_in? && current_user.id == post.user_id %>
+        <% if allowed_to?(:update?, post) %>
 	        <td>
             <div class="mx-2 mt-4">
               <%= button_to "Edit", edit_post_path(post), method: :get, class: "btn btn-primary"  %>
@@ -36,7 +36,7 @@
   </tbody>
 </table>
 <br>
-<% if user_signed_in? %>
+<% if allowed_to?(:create?, Post) %>
   <div class="mt-4">
     <%= button_to "New post", new_post_path, method: :get, class: "btn btn-primary"  %>
   </div>

@@ -5,5 +5,8 @@ Rails.application.routes.draw do
 
   root "home#index"
 
-  resources :posts
+  resources :posts do
+    post "publish", to: "publication#create"
+    delete "unpublish", to: "publication#destroy"
+  end
 end

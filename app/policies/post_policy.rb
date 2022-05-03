@@ -1,6 +1,6 @@
 class PostPolicy < ApplicationPolicy
   def create?
-    true
+    user.present?
   end
 
   def update?
@@ -9,5 +9,13 @@ class PostPolicy < ApplicationPolicy
 
   def delete?
     owner?
+  end
+
+  def publish?
+    owner? && record.draft?
+  end
+
+  def unpublish?
+    owner? && record.published?
   end
 end

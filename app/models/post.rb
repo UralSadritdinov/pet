@@ -12,4 +12,7 @@ class Post < ApplicationRecord
   enumerize :status, in: STATUSES, predicates: true, scope: true
 
   validates :title, :status, presence: true
+
+  scope :draft, -> { kept.where(status: "draft") }
+  scope :published, -> { kept.where(status: "published") }
 end

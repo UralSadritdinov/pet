@@ -2,12 +2,14 @@ class PostsController < ApplicationController
   before_action :find_post, only: %i[show edit update destroy]
 
   def new
-    @post = Post.new
+    authorize! "post", to: :create?, with: PostPolicy
 
-    authorize! @post, to: :create?, with: PostPolicy
+    @post = Post.new
   end
 
   def create
+    authorize! "post", to: :create?, with: PostPolicy
+
     @post = Post.new(post_params)
 
     if @post.save
@@ -18,7 +20,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.kept
+    @posts = Post.published
   end
 
   def show
