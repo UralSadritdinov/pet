@@ -13,6 +13,7 @@ gem "devise"
 gem "discard"
 gem "enumerize"
 gem "importmap-rails"
+gem "interactor"
 gem "jbuilder"
 gem "puma"
 gem "redis"
@@ -33,6 +34,7 @@ group :development, :test do
   gem "rubocop"
   gem "rubocop-rails"
   gem "rubocop-rspec"
+  gem "simplecov"
 end
 
 group :development do

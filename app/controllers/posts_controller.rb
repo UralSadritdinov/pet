@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :find_post, only: %i[show edit update destroy]
 
   def new
-    authorize! "post", to: :create?, with: PostPolicy
+    allowed_to? :create?, :post, with: PostPolicy
 
     @post = Post.new
   end
@@ -20,18 +20,21 @@ class PostsController < ApplicationController
   end
 
   def index
+    allowed_to? :index?, :posts, with: PostPolicy
+
     @posts = Post.published
   end
 
   def show
+    allowed_to? :show?, with: PostPolicy
   end
 
   def edit
-    authorize! @post, to: :update?
+    allowed_to? :show?, with: PostPolicy
   end
 
   def update
-    authorize! @post, to: :update?
+    authorize! to: :update?
 
     if @post.update(post_params)
       redirect_to @post, notice: "Post was successfully updated"
@@ -41,7 +44,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    authorize! @post, to: :delete?
+    authorize! to: :delete?
 
     redirect_to posts_url, notice: "Post was successfully deleted" if @post.discard
   end
@@ -49,10 +52,14 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :content).merge!(user_id: current_user.id, status: "draft")
+    params.require(:post).permit(:title, :content).merge!(user_id: current_user.id, status: @post&.status || "draft")
   end
 
   def find_post
     @post = Post.kept.find(params[:id])
+  end
+
+  def implicit_authorization_target
+    @post
   end
 end

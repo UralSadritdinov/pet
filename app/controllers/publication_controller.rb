@@ -2,7 +2,7 @@ class PublicationController < ApplicationController
   before_action :find_post, only: %i[create destroy]
 
   def create
-    authorize! @post, to: :publish?
+    authorize! to: :publish?
 
     if @post.update(status: "published")
       redirect_to @post, notice: "Post was successfully published"
@@ -12,7 +12,7 @@ class PublicationController < ApplicationController
   end
 
   def destroy
-    authorize! @post, to: :unpublish?
+    authorize! to: :unpublish?
 
     if @post.update(status: "draft")
       redirect_to @post, notice: "Post was successfully back to draft"
@@ -25,5 +25,9 @@ class PublicationController < ApplicationController
 
   def find_post
     @post = Post.kept.find(params[:post_id])
+  end
+
+  def implicit_authorization_target
+    @post
   end
 end
