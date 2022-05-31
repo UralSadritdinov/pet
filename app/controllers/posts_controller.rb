@@ -10,10 +10,10 @@ class PostsController < ApplicationController
   def create
     authorize! "post", to: :create?, with: PostPolicy
 
-    @post = Post.new(post_params)
+    result = ::Posts::Create.call(post_params: post_params)
 
-    if @post.save
-      redirect_to @post, notice: "Post was successfully created"
+    if result.success?
+      redirect_to result.post, notice: "Post was successfully created"
     else
       render :new, alert: "Post wasn't created"
     end
@@ -36,8 +36,10 @@ class PostsController < ApplicationController
   def update
     authorize! to: :update?
 
-    if @post.update(post_params)
-      redirect_to @post, notice: "Post was successfully updated"
+    result = ::Posts::Update.call(post: @post, post_params: post_params)
+
+    if result.success?
+      redirect_to result.post, notice: "Post was successfully updated"
     else
       render :edit, alert: "Post wasn't updated"
     end
@@ -46,17 +48,19 @@ class PostsController < ApplicationController
   def destroy
     authorize! to: :delete?
 
-    redirect_to posts_url, notice: "Post was successfully deleted" if @post.discard
+    result = ::Posts::Archive.call(post: @post)
+
+    redirect_to posts_url, notice: "Post was successfully updated" if result.success?
   end
 
   private
 
   def post_params
-    params.require(:post).permit(:title, :content).merge!(user_id: current_user.id, status: @post&.status || "draft")
+    params.require(:post).permit(:title, :content).merge!(user_id: current_user.id)
   end
 
   def find_post
-    @post = Post.kept.find(params[:id])
+    @post ||= Post.kept.find(params[:id])
   end
 
   def implicit_authorization_target
