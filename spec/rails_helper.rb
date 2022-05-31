@@ -9,7 +9,9 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require "rspec/rails"
 require "action_policy/rspec/dsl"
 
+# rubocop:disable Rails/FilePath
 Dir[Rails.root.join("spec", "support", "**", "*.rb")].sort.each { |f| require f }
+# rubocop:enable Rails/FilePath
 
 begin
   ActiveRecord::Migration.maintain_test_schema!

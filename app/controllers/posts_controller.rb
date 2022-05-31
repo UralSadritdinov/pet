@@ -59,9 +59,11 @@ class PostsController < ApplicationController
     params.require(:post).permit(:title, :content).merge!(user_id: current_user.id)
   end
 
+  # rubocop:disable Naming/MemoizedInstanceVariableName
   def find_post
     @post ||= Post.kept.find(params[:id])
   end
+  # rubocop:enable Naming/MemoizedInstanceVariableName
 
   def implicit_authorization_target
     @post
