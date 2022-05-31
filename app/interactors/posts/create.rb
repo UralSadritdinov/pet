@@ -1,4 +1,4 @@
-module Posts  
+module Posts
   class Create
     include Interactor::Organizer
 

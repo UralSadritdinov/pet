@@ -1,4 +1,4 @@
-module Posts  
+module Posts
   class Update
     include Interactor::Organizer
 

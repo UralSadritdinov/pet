@@ -1,4 +1,4 @@
-module Posts  
+module Posts
   class Save
     include Interactor
 
