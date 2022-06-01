@@ -13,5 +13,11 @@ describe Posts::Update do
 
   describe ".call" do
     it_behaves_like "success interactor"
+
+    it "updates post" do
+      interactor.run
+
+      expect(post).to have_attributes(post_params)
+    end
   end
 end

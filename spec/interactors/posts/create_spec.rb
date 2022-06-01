@@ -15,5 +15,11 @@ describe Posts::Create do
 
   describe ".call" do
     it_behaves_like "success interactor"
+
+    it "creates post" do
+      interactor.run
+
+      expect(Post.kept.count).to eq(1)
+    end
   end
 end

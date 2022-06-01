@@ -8,5 +8,11 @@ describe Posts::Archive do
 
   describe ".call" do
     it_behaves_like "success interactor"
+
+    it "archives post" do
+      interactor.run
+
+      expect(Post.discarded.count).to eq(1)
+    end
   end
 end
