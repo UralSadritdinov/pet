@@ -1,5 +1,5 @@
-class PublicationController < ApplicationController
-  before_action :find_post, only: %i[create destroy]
+class PublicationsController < ApplicationController
+  before_action :post
 
   def create
     authorize! to: :publish?
@@ -23,8 +23,8 @@ class PublicationController < ApplicationController
 
   private
 
-  def find_post
-    @post = Post.kept.find(params[:post_id])
+  def post
+    @post ||= Post.kept.find(params[:post_id])
   end
 
   def implicit_authorization_target

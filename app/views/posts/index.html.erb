@@ -1,5 +1,11 @@
 <h1 class="mt-4">Listing Posts</h1>
 
+<% if allowed_to?(:create?, Post) %>
+  <div class="mt-4">
+    <%= button_to "New post", new_post_path, method: :get, class: "btn btn-primary"  %>
+  </div>
+<% end %>
+
 <table class="mt-4">
   <thead>
     <tr>
@@ -36,8 +42,3 @@
   </tbody>
 </table>
 <br>
-<% if allowed_to?(:create?, Post) %>
-  <div class="mt-4">
-    <%= button_to "New post", new_post_path, method: :get, class: "btn btn-primary"  %>
-  </div>
-<% end %>
