@@ -41,7 +41,7 @@ jobs:
           message: |
             ${{ github.actor }} just opened PR in ${{ github.repository }} with comment "${{github.event.pull_request.title}}"
             ${{ github.event.pull_request.html_url }}
-  # tests:
+  # test:
   #   name: rspec
   #   runs-on: ubuntu-latest
   #   services:
@@ -49,9 +49,14 @@ jobs:
   #       image: postgres:12
   #       ports: ["5432:5432"]
   #       env:
+  #          POSTGRES_DB: pet_test
   #         POSTGRES_USER: pet
-  #         POSTGRES_DB: pet_test
-  #         POSTGRES_PASSWORD: ""
+  #         POSTGRES_PASSWORD: postgres
+  #     options: >-
+          # --health-cmd pg_isready
+          # --health-interval 10s
+          # --health-timeout 5s
+          # --health-retries 5
   #   env:
   #     RAILS_ENV: test
   #     DATABASE_URL: "postgres://pet:postgres@localhost:5432/pet_test"

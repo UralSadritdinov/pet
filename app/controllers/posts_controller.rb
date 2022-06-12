@@ -1,14 +1,14 @@
 class PostsController < ApplicationController
-  before_action :find_post, only: %i[show edit update destroy]
+  before_action :post, only: %i[show edit update destroy]
 
   def new
-    allowed_to? :create?, :post, with: PostPolicy
+    authorize! :post, to: :create?
 
     @post = Post.new
   end
 
   def create
-    authorize! "post", to: :create?, with: PostPolicy
+    authorize! :post, to: :create?
 
     result = ::Posts::Create.call(post_params: post_params)
 
@@ -20,17 +20,17 @@ class PostsController < ApplicationController
   end
 
   def index
-    allowed_to? :index?, :posts, with: PostPolicy
+    authorize! :post, to: :index?
 
     @posts = Post.published
   end
 
   def show
-    allowed_to? :show?, with: PostPolicy
+    authorize! to: :show?
   end
 
   def edit
-    allowed_to? :show?, with: PostPolicy
+    authorize! to: :update?
   end
 
   def update
@@ -59,11 +59,9 @@ class PostsController < ApplicationController
     params.require(:post).permit(:title, :content).merge!(user_id: current_user.id)
   end
 
-  # rubocop:disable Naming/MemoizedInstanceVariableName
-  def find_post
+  def post
     @post ||= Post.kept.find(params[:id])
   end
-  # rubocop:enable Naming/MemoizedInstanceVariableName
 
   def implicit_authorization_target
     @post
