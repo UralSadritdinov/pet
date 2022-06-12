@@ -13,6 +13,7 @@ gem "devise"
 gem "discard"
 gem "enumerize"
 gem "importmap-rails"
+gem "interactor"
 gem "jbuilder"
 gem "puma"
 gem "redis"
@@ -24,6 +25,7 @@ gem "turbo-rails"
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 
 group :development, :test do
+  gem "capybara"
   gem "debug", platforms: %i[mri mingw x64_mingw]
   gem "factory_bot_rails"
   gem "ffaker"
@@ -33,6 +35,7 @@ group :development, :test do
   gem "rubocop"
   gem "rubocop-rails"
   gem "rubocop-rspec"
+  gem "simplecov"
 end
 
 group :development do
@@ -41,8 +44,7 @@ group :development do
 end
 
 group :test do
-  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara"
+  gem "database_cleaner-active_record"
   gem "selenium-webdriver"
   gem "webdrivers"
 end

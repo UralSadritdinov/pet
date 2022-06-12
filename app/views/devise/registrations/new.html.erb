@@ -18,9 +18,10 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder: "Repeat password" %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up", class: "btn btn-primary mx-5 my-3" %>
+  <div class="form-group mx-5">
+    <%= f.submit "Sign up", class: "btn btn-primary my-3" %>
+    <div>
+      <%= render "devise/shared/links" %>
+    </div>
   </div>
 <% end %>
-
-<%= render "devise/shared/links" %>

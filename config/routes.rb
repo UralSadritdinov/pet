@@ -3,10 +3,13 @@ Rails.application.routes.draw do
     get "/users/sign_out" => "devise/sessions#destroy"
   end
 
-  root "home#index"
+  root "about_me#show"
+
+  resource :about_me, controller: :about_me, only: %i[show]
+  resource :contact_me, controller: :contact_me, only: %i[new create]
 
   resources :posts do
-    post "publish", to: "publication#create"
-    delete "unpublish", to: "publication#destroy"
+    post "publish", to: "publications#create"
+    delete "unpublish", to: "publications#destroy"
   end
 end
