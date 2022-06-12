@@ -18,8 +18,10 @@
         </div>
         <div class="btn-group my-3">
           <%= button_to "Show", post, method: :get, class: "btn btn-primary mx-3" %>
-          <%= button_to "Edit", edit_post_path(post), method: :get, class: "btn btn-primary mx-3" %>
-          <%= button_to "Destroy", post, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn btn-primary mx-3" %>
+          <% if allowed_to?(:update?, post) %>
+            <%= button_to "Edit", edit_post_path(post), method: :get, class: "btn btn-primary mx-3" %>
+            <%= button_to "Destroy", post, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn btn-primary mx-3" %>
+          <% end %>
         </div>
       </div>
     </div>
