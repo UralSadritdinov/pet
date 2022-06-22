@@ -41,33 +41,17 @@ jobs:
           message: |
             ${{ github.actor }} just opened PR in ${{ github.repository }} with comment "${{github.event.pull_request.title}}"
             ${{ github.event.pull_request.html_url }}
-  # test:
-  #   name: rspec
-  #   runs-on: ubuntu-latest
-  #   services:
-  #     postgres:
-  #       image: postgres:12
-  #       ports: ["5432:5432"]
-  #       env:
-  #          POSTGRES_DB: pet_test
-  #         POSTGRES_USER: pet
-  #         POSTGRES_PASSWORD: postgres
-  #     options: >-
-          # --health-cmd pg_isready
-          # --health-interval 10s
-          # --health-timeout 5s
-          # --health-retries 5
-  #   env:
-  #     RAILS_ENV: test
-  #     DATABASE_URL: "postgres://pet:postgres@localhost:5432/pet_test"
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v2
-  #     - name: Install Ruby and gems
-  #       uses: ruby/setup-ruby@8f312efe1262fb463d906e9bf040319394c18d3e # v1.92
-  #       with:
-  #         bundler-cache: true
-  #     - name: Set up database schema
-  #       run: bin/rails db:schema:load
-  #     - name: Run tests
-  #       run: bin/rspec
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@359bebbc29cbe6c87da6bc9ea3bc930432750108
+        with:
+          ruby-version: '3.0.3'
+          bundler-cache: true
+      - name: Install dependencies
+        run: bundle install
+      - name: Run tests
+        run: bin/rspec
