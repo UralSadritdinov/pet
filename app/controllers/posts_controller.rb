@@ -22,7 +22,7 @@ class PostsController < ApplicationController
   def index
     authorize! :post, to: :index?
 
-    @posts = Post.published
+    @posts = Post.published.includes(:user).order(created_at: :desc)
   end
 
   def show
