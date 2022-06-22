@@ -43,6 +43,18 @@ jobs:
             ${{ github.event.pull_request.html_url }}
   test:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:12-alpine
+        ports:
+          - "5432:5432"
+        env:
+          POSTGRES_DB: pet_test
+          POSTGRES_USER: rails
+          POSTGRES_PASSWORD: password
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: "postgres://rails:password@localhost:5432/pet_test"
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -53,5 +65,7 @@ jobs:
           bundler-cache: true
       - name: Install dependencies
         run: bundle install
+      - name: Set up database
+        run: bin/rails db:setup
       - name: Run tests
         run: bin/rspec
